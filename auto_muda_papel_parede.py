@@ -4,7 +4,7 @@ from os import walk
 import ctypes
 import random
 
-directory = "choose path"
+directory = "G:/Imagens/Wallpaper"
 files = []
 number_files = 0
 
@@ -22,10 +22,7 @@ def on_get_directory():
     
         directory = new_directory
     
-        en_directory["state"] = NORMAL
-        en_directory.delete(0, END)
-        en_directory.insert(0, directory)
-        en_directory["state"] = "readonly"
+        entry_set_text(en_directory, directory)
     
         on_count_files(directory)
     
@@ -40,10 +37,7 @@ def on_count_files(path):
         
         number_files = number_files + len(filenames)
                                 
-    en_files["state"] = NORMAL
-    en_files.delete(0, END)
-    en_files.insert(0, number_files)
-    en_files["state"] = "readonly"
+    entry_set_text(en_files, number_files)
     
     if number_files > 0:
         bt_start["state"] = NORMAL
@@ -65,6 +59,14 @@ def on_start():
     print(path)
     SPI_SETDESKWALLPAPER = 20
     ctypes.windll.user32.SystemParametersInfoW(SPI_SETDESKWALLPAPER, 0, path, 3)
+    
+
+def entry_set_text(entry, text):
+    entry["state"] = NORMAL
+    entry.delete(0, END)
+    entry.insert(0, text)
+    entry["state"] = "readonly"
+    
     
 window = Tk()
 
@@ -102,6 +104,9 @@ frame_pic = Frame(frame_3,
                   height=240,
                   width=200)
 frame_pic.pack(fill=BOTH, expand=True)
+
+entry_set_text(en_directory, directory)
+on_count_files(directory)
                 
 # start the program
 window.mainloop()
