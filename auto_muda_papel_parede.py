@@ -22,7 +22,7 @@ def on_get_directory():
     
         directory = new_directory
     
-        entry_set_text(en_directory, directory)
+        set_text_entry(en_directory, directory)
     
         count_files(directory)
     
@@ -37,7 +37,7 @@ def count_files(path):
         
         number_files = number_files + len(filenames)
                                 
-    entry_set_text(en_files, number_files)
+    set_text_entry(en_files, number_files)
     
     if number_files > 0:
         bt_start["state"] = NORMAL
@@ -61,7 +61,7 @@ def on_start():
     ctypes.windll.user32.SystemParametersInfoW(SPI_SETDESKWALLPAPER, 0, path, 3)
     
 
-def entry_set_text(entry, text):
+def set_text_entry(entry, text):
     entry["state"] = NORMAL
     entry.delete(0, END)
     entry.insert(0, text)
@@ -105,7 +105,7 @@ frame_pic = Frame(frame_3,
                   width=200)
 frame_pic.pack(fill=BOTH, expand=True)
 
-entry_set_text(en_directory, directory)
+set_text_entry(en_directory, directory)
 count_files(directory)
                 
 # start the program
