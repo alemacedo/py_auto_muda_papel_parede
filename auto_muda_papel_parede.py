@@ -24,9 +24,9 @@ def on_get_directory():
     
         entry_set_text(en_directory, directory)
     
-        on_count_files(directory)
+        count_files(directory)
     
-def on_count_files(path):
+def count_files(path):
     
     global files, number_files
     
@@ -106,7 +106,7 @@ frame_pic = Frame(frame_3,
 frame_pic.pack(fill=BOTH, expand=True)
 
 entry_set_text(en_directory, directory)
-on_count_files(directory)
+count_files(directory)
                 
 # start the program
 window.mainloop()
